@@ -61,74 +61,109 @@
   </style>
 </head>
 <body>
-  <div class="widget">
-    <div class="greet" id="greet">Good Morning, YourName</div>
-    <div class="date" id="date"></div>
-    <div class="clock">
-      <span class="time" id="hour">00</span>
-      <span class="colon">:</span>
-      <span class="time" id="min">00</span>
-      <span class="colon">:</span>
-      <span class="time" id="sec">00 AM</span>
+
+
+<div class="container>">
+    <div class="widget">
+
+            <div class="greet" id="greet"></div>
+
+                <div class="date" id="date"></div>
+                <div class="clock">
+                    <div class="time" id="hour"></div>
+                    <div class="colon">:</div>
+                    <div class="time" id="min"></div>
+                    <div class="colon">:</div>
+                    <div class="time" id="sec"></div>
+                </div>
+           
+
+        
+
     </div>
-  </div>
+</div>
+        
 
-  <script>
-    const userName = "YourName"; // Replace this with dynamic user name if available
 
-    function displayGreetings(date) {
-      const hrs = date.getHours();
-      let greeting = '';
 
-      if (hrs < 12) {
-        greeting = `Good Morning, ${userName}`;
-      } else if (hrs < 17) {
-        greeting = `Good Afternoon, ${userName}`;
-      } else {
-        greeting = `Good Evening, ${userName}`;
-      }
+<script>
 
-      document.getElementById('greet').textContent = greeting;
+function dispalyGreetings(today){
+        hrs = today.getHours();
+        name=""
+        if (hrs < 12)
+            greet = 'Good Morning  '+name;
+        else if (hrs >= 12 && hrs <= 17)
+            greet = 'Good Afternoon '+name;
+        else if (hrs >= 17 && hrs <= 24)
+            greet = 'Good Evening  '+name;
+        document.getElementById('greet').innerHTML = greet;
+
     }
 
-    function displayDate(date) {
-      const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-      const months = [
-        "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-      ];
+    function dispalyDate(today) {  
+       
+        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
 
-      const dayName = days[date.getDay()];
-      const monthName = months[date.getMonth()];
-      const dayNum = date.getDate();
-      const year = date.getFullYear();
+        var dayName = days[today.getDay()];
+        var monthName = monthNames[today.getMonth()];
+        var date = today.getDate();
+        var year = today.getFullYear();
+        document.getElementById('date').innerHTML =dayName+", "+monthName+" "+date+" "+year;
 
-      document.getElementById('date').textContent = `${dayName}, ${monthName} ${dayNum}, ${year}`;
     }
 
-    function displayClock(date) {
-      let hour = date.getHours();
-      const minutes = date.getMinutes();
-      const seconds = date.getSeconds();
-      const ampm = hour >= 12 ? 'PM' : 'AM';
 
-      hour = hour % 12;
-      hour = hour ? hour : 12; // the hour '0' should be '12'
+    function dispalyClock(today) {
 
-      document.getElementById('hour').textContent = hour.toString().padStart(2, '0');
-      document.getElementById('min').textContent = minutes.toString().padStart(2, '0');
-      document.getElementById('sec').textContent = seconds.toString().padStart(2, '0') + ' ' + ampm;
+        var hour = padZeros(twelveHour(today.getHours()));
+        var minutes = padZeros(today.getMinutes());
+        var seconds = padZeros(today.getSeconds());
+       
+        if(today.getHours() >=12){
+            seconds+=" pm"
+        }
+        else{
+            seconds+=" am"
+        }
+       
+        document.getElementById('hour').innerHTML = hour;
+        document.getElementById('min').innerHTML = minutes;
+        document.getElementById('sec').innerHTML = seconds;
     }
 
-    function updateWidget() {
-      const now = new Date();
-      displayGreetings(now);
-      displayDate(now);
-      displayClock(now);
-      setTimeout(updateWidget, 500);
+    function twelveHour(hour) {
+        if (hour > 12) {
+            return hour -= 12
+        } else if (hour === 0) {
+            return hour = 12;
+        } else {
+            return hour
+        }
+    }
+    function padZeros(num) {
+        if (num < 10) {
+            num = '0' + num
+        };
+        return num;
     }
 
-    updateWidget();
-  </script>
+    function dispalyWidget() {
+        var today = new Date();
+        dispalyGreetings(today);
+        dispalyDate(today);
+        dispalyClock(today);
+        setTimeout(dispalyWidget, 500);
+    }
+
+    dispalyWidget()
+
+</script>
+
 </body>
 </html>
+
+  
