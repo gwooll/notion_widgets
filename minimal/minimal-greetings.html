@@ -118,18 +118,15 @@ function displayGreetings(today){
   const greetEl = document.getElementById('greet');
   greetEl.classList.remove('morning', 'afternoon', 'evening');
 
-  if (hrs < 12) {
-    greet = 'Good Morning ☀️';
-    greetEl.classList.add('morning');
-  } else if (hrs >= 12 && hrs <= 17) {
-    greet = 'Good Afternoon 🌤️';
-    greetEl.classList.add('afternoon');
-  } else {
-    greet = 'Good Evening 🌙';
-    greetEl.classList.add('evening');
-  }
+  if (hrs < 12)
+            greet = 'Good Morning ☀️';
+        else if (hrs >= 12 && hrs <= 17)
+            greet = 'Good Afternoon 🌤️';
+        else if (hrs >= 17 && hrs <= 24)
+            greet = 'Good Evening 🌙';
+        document.getElementById('greet').innerHTML = greet;
 
-  greetEl.textContent = greet;
+  
 }
 
 function displayDate(today) {
