@@ -43,10 +43,10 @@
       color: #f39c12; /* orange */
     }
     .greet.afternoon {
-      color: #27ae60; /* green */
+      color: #f39c12; /* green */
     }
     .greet.evening {
-      color: #8e44ad; /* purple */
+      color: #f39c12; /* purple */
     }
 
     .date {
@@ -147,12 +147,12 @@ function displayClock(today) {
   const hour24 = today.getHours();
   const hour12 = twelveHour(hour24);
   const minutes = padZeros(today.getMinutes());
-  const seconds = padZeros(today.getSeconds());
+  
   const ampm = hour24 >= 12 ? 'PM' : 'AM';
 
   document.getElementById('hour').textContent = hour12;
   document.getElementById('min').textContent = minutes;
-  document.getElementById('sec').textContent = seconds;
+  
   document.getElementById('ampm').textContent = ampm;
 }
 
